@@ -5,8 +5,9 @@ function getComputerChoice () {
 
 
 function winOrLose (playerChoice, compChoice) {
-    if (playerChoice === compChoice) {
-        resetRound();
+    
+    while(playerChoice === compChoice) {
+        compChoice = getComputerChoice();
     }
 
     if (playerChoice === 'rock' && compChoice === 'scissors' ||
@@ -16,11 +17,6 @@ function winOrLose (playerChoice, compChoice) {
     } else {
         return false;
     }
-}
-
-
-function resetRound () {
-
 }
 
 
