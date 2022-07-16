@@ -43,10 +43,15 @@ function game() {
     let playerChoice;
     let compChoice;
     let res;
+    let options = ["rock", "paper", "scissors"];
 
     for(let round = 0; round < 5; round++) {
         playerChoice = prompt('Enter your choice:');
         compChoice = getComputerChoice();
+
+        while(!options.includes(playerChoice.toLowerCase())) {
+            playerChoice = prompt("Invalid input, please enter 'rock', 'paper', or 'scissors'.");
+        }
 
         res = playOneRound(playerChoice, compChoice);
         console.log(res[0]);
