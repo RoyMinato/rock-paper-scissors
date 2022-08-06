@@ -1,11 +1,10 @@
 let playerScore = 0;
 let compScore = 0;
-let scoreKeep = `Player: ${playerScore}   Computer: ${compScore} \r\n`
 
 function updateScoreKeep (addPlayer, addComp){
     playerScore += addPlayer;
     compScore += addComp;
-    scoreKeep = `Player: ${playerScore}   Computer: ${compScore} \r\n`
+    score.textContent = `Player: ${playerScore}     Computer: ${compScore}`;
 }
 
 
@@ -37,7 +36,7 @@ function playRound (e) {
     compChoice = getComputerChoice();
 
     if(playerChoice === compChoice) {
-        res.textContent = scoreKeep + `It's a draw! Both picked ${playerChoice}.`
+        prompt.textContent = `It's a draw! Both picked ${playerChoice}.`;
         return;
     }
 
@@ -45,38 +44,37 @@ function playRound (e) {
 
     if (playerWin) {
         updateScoreKeep(1,0);
-        res.textContent = scoreKeep + `You Win! ${playerChoice} beats ${compChoice}.`;
+        prompt.textContent = `You Win! ${playerChoice} beats ${compChoice}.`;
     } else {
         updateScoreKeep(0,1);
-        res.textContent = scoreKeep + `You Lose! ${compChoice} beats ${playerChoice}.`;
+        prompt.textContent = `You Lose! ${compChoice} beats ${playerChoice}.`;
     }
 
     if(playerScore == 5 || compScore == 5){
         if (playerScore > compScore) {
-            res.textContent = scoreKeep + `You won 5 rounds first! You won the game!`;
+            prompt.textContent = `You won the game! Reset to play again.`;
         }
         else {
-            res.textContent = scoreKeep + `You lost 5 rounds so you lost the game.`;
+            prompt.textContent = `You lost the game. Reset to play again.`;
         }
     }
 
 }
 
 
-const res = document.querySelector('#results');
-res.setAttribute('style', 'white-space: pre;')
-res.textContent = scoreKeep + `Make your move!`;
+const score = document.querySelector('.score');
+const prompt = document.querySelector('.prompt');
+
+score.setAttribute('style', 'white-space: pre;');
 
 //div containing buttons but only respond to button clicks
-const btns = document.querySelector('#choices'); 
+const btns = document.querySelector('.choices'); 
 btns.addEventListener('click', playRound);
 
 const reset = document.querySelector('#reset');
 
 reset.addEventListener('click', () => {
-    playerScore = 0;
-    compScore = 0;
     updateScoreKeep(-playerScore, -compScore);
-    res.textContent = scoreKeep + `Make your move!`;
+    prompt.textContent = `Make your move!`;
 });
 
